@@ -1,9 +1,9 @@
 //
 //  ViewController.swift
-//  TrueFalseStarter
+//  Simple quiz app
 //
-//  Created by Pasan Premaratne on 3/9/16.
-//  Copyright © 2016 Treehouse. All rights reserved.
+//  Created by William Vivas 3/25/17
+//  Copyright © 2016 WIlliam Vivas All rights reserved.
 //
 
 import UIKit
@@ -12,7 +12,7 @@ import AudioToolbox
 
 class ViewController: UIViewController {
     
-    let questionsPerRound = trivia.count
+    let questionsPerRound = listOftriviaQuestions.count
     var questionsAsked = 0
     var correctQuestions = 0
     var indexOfSelectedQuestion: Int = 0
@@ -43,8 +43,8 @@ class ViewController: UIViewController {
     }
     
     func displayQuestion() {
-        indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextInt(upperBound: trivia.count)
-        let triviaQuestions = trivia[indexOfSelectedQuestion]
+        indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextInt(upperBound: listOftriviaQuestions.count)
+        let triviaQuestions = listOftriviaQuestions[indexOfSelectedQuestion]
         // questionField.Text needs to be the questions from the trivia array
         questionField.text = triviaQuestions.question
         AnswerAButton.setTitle(triviaQuestions.optionA, for: .normal)
@@ -72,13 +72,15 @@ class ViewController: UIViewController {
         // Increment the questions asked counter
         questionsAsked += 1
         
-        let selectedQuestionDict = trivia[indexOfSelectedQuestion]
-        let correctAnswer = trivia
+        let selectedQuestionDict = listOftriviaQuestions[indexOfSelectedQuestion]
+        let correctAnswer = selectedQuestionDict.correctAnswer
         
-        if (sender === AnswerAButton &&  correctAnswer == "A") || (sender === AnswerBButton && correctAnswer == trivia.) || (sender === AnswerCButton &&  correctAnswer == "C") || (sender === AnswerDButton &&  correctAnswer == "D")  {
+        if sender.titleLabel!.text == correctAnswer
+            {
             correctQuestions += 1
             questionField.text = "Correct!"
-        } else {
+        }
+            else {
             questionField.text = "Sorry, wrong answer!"
         }
         
